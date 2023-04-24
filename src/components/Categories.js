@@ -1,10 +1,7 @@
-import {useState} from "react";
-
-export default function Categories({items, onClickItem}) {
-    const [activeItem, setActiveItem] = useState(null);
+export default function Categories({items, onClickItem, activeItem}) {
 
     const onSelectItem = (index) => {
-        setActiveItem(index)
+        onClickItem(index);
     }
 
     const elements = items && items.map((item, i) => {
