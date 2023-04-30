@@ -1,24 +1,33 @@
-const initialState = {
-    items: {},
-    totalPrice: 0,
-    totalCount: 0
-};
-
-const cart = (state = initialState, action) => {
-    switch (action.type) {
-        case "SET_TOTAL_PRICE":
-            return {
-                ...state,
-                totalPrice: action.payload,
-            }
-        case "SET_TOTAL_COUNT":
-            return {
-                ...state,
-                totalCount: action.payload
-            }
-        default:
-            return state
+export const addPizzaToCard = (pizzaObj) => {
+    return {
+        type: "ADD_PIZZA_CART",
+        payload: pizzaObj
     }
 }
 
-export default cart
+export const clearCart = () => {
+    return {
+        type: "CLEAR_CART",
+    }
+}
+
+export const removeCartItem = (id) => {
+    return {
+        type: "REMOVE_CART_ITEM",
+        payload: id
+    }
+}
+
+export const plusCartItem = (id) => {
+    return {
+        type: "PLUS_CART_ITEM",
+        payload: id
+    }
+}
+
+export const minusCartItem = (id) => {
+    return {
+        type: "MINUS_CART_ITEM",
+        payload: id
+    }
+}

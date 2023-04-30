@@ -7,10 +7,12 @@ import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 
 import {setCategory, setSortBy} from "../redux/actions/filters";
 import {fetchPizzas} from "../redux/actions/pizzas";
+import {addPizzaToCard} from "../redux/actions/cart";
 import PizzaLoadingBlock from "../components/PizzaBlock/PizzaLoadingBlock";
 
 function Home() {
     const items = useSelector((state) => state.pizzas.items);
+    const cartItems = useSelector(state => state.cart.items);
     const isLoaded = useSelector((state) => state.pizzas.isLoaded);
     const {category, sortBy} = useSelector((state) => state.filters);
     const dispatch = useDispatch();
@@ -44,10 +46,19 @@ function Home() {
         }, []
     )
 
+    const handleAddPizza = obj => {
+        dispatch(addPizzaToCard(obj))
+    }
+
     const elements = isLoaded
         ? items.map((item) => {
             return (
-                <PizzaBlock key={item.id} {...item}/>
+                <PizzaBlock
+                    onClickAddPizza={handleAddPizza}
+                    addedCount={cartItems[item.id] && cartItems[item.id].items.length}
+                    key={item.id}
+                    {...item}
+                />
             )
         })
         : Array(10).fill(0).map((item, index) => <PizzaLoadingBlock key={index}/>)

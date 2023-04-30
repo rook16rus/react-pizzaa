@@ -1,12 +1,12 @@
 import classNames from "classnames";
 
-function Button({className, outline, children}) {
+function Button({className, outline, children, onClick}) {
     const clazz = classNames('button', className, {
         'button--outline': outline
     })
     
     return (
-        <button className={clazz}>
+        <button onClick={onClick} className={clazz}>
             {children}
         </button>
     )
